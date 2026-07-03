@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   // baseURL: "http://localhost:5001/api",
-  baseURL: "https://hungryheart.onrender.com/",
+  baseURL: "https://hungryheart.onrender.com/api",
   
   headers: { "Content-Type": "application/json" },
 });
