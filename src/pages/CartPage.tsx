@@ -8,6 +8,7 @@ import {
   selectCartTotal,
 } from "../store/slices/cartSlice";
 import Button from "../components/ui/Button";
+import { useState } from "react";
 
 const DELIVERY_CHARGE = 40;
 const TAX_RATE = 0.05;
@@ -117,6 +118,7 @@ export default function CartPage() {
               placeholder="Any allergies, delivery notes, etc."
             />
           </div>
+          
         </div>
 
         <div className="bg-white rounded-2xl shadow-md p-6 border h-fit sticky top-24">

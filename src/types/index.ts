@@ -62,6 +62,7 @@ export interface OrderPayload {
   subtotal: number;
   tax: number;
   deliveryCharge: number;
+  phoneNumber: string;
   total: number;
   deliveryAddress: string;
   deliveryTime: string;

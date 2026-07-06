@@ -22,6 +22,8 @@ export default function CheckoutPage() {
   const [deliveryTime, setDeliveryTime] = useState("ASAP");
   const [paymentMethod, setPaymentMethod] = useState("UPI");
 
+  const [phoneNumber, setPhoneNumber] = useState("");
+
   const subtotal = useAppSelector(selectCartTotal);
   const tax = Math.round(subtotal * TAX_RATE);
   const total = subtotal + tax + DELIVERY_CHARGE;
@@ -48,6 +50,7 @@ export default function CheckoutPage() {
           imageUrl: i.imageUrl,
         })),
         subtotal,
+        phoneNumber,
         tax,
         deliveryCharge: DELIVERY_CHARGE,
         total,
@@ -107,6 +110,18 @@ export default function CheckoutPage() {
                 rows={3}
                 className="w-full border rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-maroon/30"
                 placeholder="Full address with pincode"
+              />
+            </section>
+            <section className="bg-white rounded-2xl shadow-sm p-6 border">
+              <h2 className="font-serif text-lg text-maroon font-bold mb-4">
+                Phone Number
+              </h2>
+              <input
+                type="tel"
+                value={phoneNumber}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="Enter your phone number"
+                className="w-full border rounded-xl px-4 py-3"
               />
             </section>
 

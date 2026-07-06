@@ -1,7 +1,10 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { ShoppingCart, User, MessageCircle } from "lucide-react";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector , useAppDispatch} from "../../store/hooks";
 import { selectCartCount } from "../../store/slices/cartSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { LogOut } from "lucide-react";
+import { logout } from "../../store/slices/authSlice";
 
 const navLinks = [
   { to: "/batters", label: "Our Batters" },
@@ -14,7 +17,13 @@ export default function Header() {
   const location = useLocation();
   const cartCount = useAppSelector(selectCartCount);
   const user = useAppSelector((s) => s.auth.user);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login", { replace: true });
+  };
   return (
     <header className="sticky top-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-maroon/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,13 +59,23 @@ export default function Header() {
               Order via WhatsApp
             </a>
 
-            <Link
-              to={user ? "/cart" : "/login"}
-              className="p-2 text-gray-700 hover:text-maroon"
-              title={user ? "Account" : "Login"}
-            >
-              <User size={22} />
-            </Link>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="p-2 text-gray-700 hover:text-maroon"
+                title="Logout"
+              >
+                <LogOut size={22} />
+              </button>
+            ) : (
+              <Link
+                to="/login"
+                className="p-2 text-gray-700 hover:text-maroon"
+                title="Login"
+              >
+                <User size={22} />
+              </Link>
+            )}
 
             <Link to="/cart" className="relative p-2 text-gray-700 hover:text-maroon">
               <ShoppingCart size={22} />
